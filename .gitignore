@@ -1,0 +1,70 @@
+# ===============================================
+# 1. DEPENDÊNCIAS
+# ===============================================
+# Ignora a pasta de módulos de dependências (todas as dependências)
+node_modules/
+
+# pnpm stores its dependencies outside of the project root by default
+# but it still creates a symlink folder inside node_modules that should be ignored.
+# Caso o pnpm crie caches locais ou symlinks extras:
+.pnpm-store
+pnpm-debug.log
+pnpm-lock.yaml.old
+
+
+# ===============================================
+# 2. ARQUIVOS DE BUILD E CÓDIGO GERADO
+# ===============================================
+# A pasta de saída do compilador TypeScript (configurada no tsconfig.json)
+# O Docker é quem irá gerar esta pasta.
+/dist/
+
+# O cache de build do tsc-watch ou ts-node
+.ts-node/
+.tsbuildinfo
+
+
+# ===============================================
+# 3. VARIÁVEIS DE AMBIENTE E ARQUIVOS SENSÍVEIS
+# ===============================================
+# Arquivos de variáveis de ambiente com dados sensíveis (API Keys, senhas)
+.env
+.env.*
+!.env.example # Permite que você inclua um arquivo .env.example (modelo)
+
+# Chaves privadas ou certificados (se aplicável)
+*.key
+*.pem
+
+
+# ===============================================
+# 4. FERRAMENTAS E AMBIENTE LOCAL
+# ===============================================
+
+# Logs de debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Arquivos de cache e configuração de IDEs/Editores
+# Visual Studio Code (VS Code)
+.vscode/*
+!.vscode/settings.json # Opcional: mantém configs de settings.json para o time
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# JetBrains IDEs (WebStorm, IntelliJ)
+.idea/
+
+# Sistema Operacional
+.DS_Store # macOS
+Thumbs.db # Windows
+
+# ===============================================
+# 5. DOCKER
+# ===============================================
+# Imagens criadas localmente pelo Docker Compose ou Docker Build
+# (O .dockerignore cuida de mais, mas é bom ter aqui)
+!Dockerfile
+!docker-compose.yml

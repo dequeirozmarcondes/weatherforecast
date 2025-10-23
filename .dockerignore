@@ -1,0 +1,10 @@
+# Ignora dependências locais e cache
+node_modules
+npm-debug.log
+
+# Ignora variáveis de ambiente (mantemos seguro)
+.env
+
+# Ignora arquivos de teste/dev
+*.tsbuildinfo
+tests
