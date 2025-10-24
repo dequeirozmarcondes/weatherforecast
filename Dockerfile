@@ -53,7 +53,7 @@ RUN pnpm install --prod --frozen-lockfile
 COPY --from=build /usr/src/app/dist ./dist
 
 # Expõe a porta usada pelo servidor Express
-EXPOSE 3000
+EXPOSE 8000
 
 # Comando padrão para iniciar a aplicação
 # (usa o script "start" do package.json → node dist/server.js)
