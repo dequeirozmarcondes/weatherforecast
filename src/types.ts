@@ -1,33 +1,36 @@
-// src/types.ts (ou no topo de index.ts)
-
-// Tipagem para um único ponto de dados (ex: airTemperature)
-interface StormGlassPointData {
-    sg: number; // Valor da previsão da fonte StormGlass (sg)
-}
-
-// Tipagem para um objeto de previsão em um determinado horário
-interface StormGlassHour {
-    time: string;
-    airTemperature: StormGlassPointData;
-    cloudCover: StormGlassPointData;
-    // ... incluir outros parâmetros se necessário
-}
-
-// Tipagem para a resposta de sucesso principal da API StormGlass
-export interface StormGlassResponse {
-    hours: StormGlassHour[];
-    meta: {
-        // ... metadados
-    }
-}
-
-// Tipagem para o corpo de erro da API StormGlass
+// Estrutura do corpo de erro da StormGlass API
 export interface StormGlassErrorBody {
-    errors?: {
-        // Os erros da StormGlass geralmente são um objeto com chaves de parâmetro
-        [key: string]: string[]; 
-    };
-    // Muitas APIs de erro também podem retornar uma simples mensagem ou código
-    code?: number;
+    errors?: Record<string, string[]> | string; // Pode ser um objeto com listas de erros ou uma string
     message?: string;
+}
+
+// Representa um ponto de dados (e.g., airTemperature) em uma hora específica
+export interface DataPoint {
+    sg: number; // Fonte: StormGlass
+}
+
+// Representa a previsão do tempo para uma hora específica
+export interface HourData {
+    time: string;
+    airTemperature: DataPoint;
+    cloudCover: DataPoint;
+}
+
+// Estrutura da resposta de sucesso da StormGlass API
+export interface StormGlassResponse {
+    hours: HourData[];
+    meta: {
+        cost: number;
+        dailyQuota: number;
+    };
+}
+
+// Estrutura de resposta padronizada para o nosso endpoint
+export interface WeatherForecastResponse {
+    latitude: string;
+    longitude: string;
+    timestamp: string;
+    temperatureCelsius: string;
+    cloudCoverPercent: string;
+    source: 'StormGlass.io';
 }
